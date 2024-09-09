@@ -1,8 +1,7 @@
 **KeystrokeML-Snippet** is a web snippet example that collects data from a user attempting to log in. The data is processed using machine learning, which allows distinguishing the user based on how they type their password, differentiating them from other users.
 
 ### Project Overview
-- **Web Snippet**: A small JavaScript snippet is embedded into any webpage to collect the typing data in real time.
-- **Keystroke Dynamics**: This project collects data on how long keys are pressed and the timing between key presses. These subtle patterns differ from person to person, which allows us to use them for identification.
+- **Web Snippet**: A small JavaScript snippet with login form, sends the typing data in real time.
 - **Flask Backend**: A Python-based Flask server handles the incoming data from the web snippet and processes it through the machine learning model to determine the user's identity.
 - **Machine Learning Model**: Using `scikit-learn`, we trained a model to analyze keystroke patterns and classify them as authentic or not.
 ----
