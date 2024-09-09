@@ -5,7 +5,7 @@
 - **Flask Backend**: A Python-based Flask server handles the incoming data from the web snippet and processes it through the machine learning model to determine the user's identity.
 - **Machine Learning Model**: Using `scikit-learn`, we trained a model to analyze keystroke patterns and classify them as authentic or not.
 ----
-![Selection_604](https://github.com/user-attachments/assets/4ce8bf7a-7f94-4d40-8dfb-f5c44d6b1ee3)
+![Selection_605](https://github.com/user-attachments/assets/08951428-0452-45d0-8507-c09f6fbd7222)
 
 ----
 
