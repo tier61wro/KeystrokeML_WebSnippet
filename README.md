@@ -1,5 +1,4 @@
-**KeystrokeML-Snippet** is a project that uses machine learning to identify users based on their typing patterns, also known as keystroke dynamics. 
-By tracking the way a user interacts with the keyboard, we can build a unique profile to verify their identity.
+**KeystrokeML-Snippet** is a web snippet example that collects data from a user attempting to log in. The data is processed using machine learning, which allows distinguishing the user based on how they type their password, differentiating them from other users.
 
 ### Project Overview
 - **Web Snippet**: A small JavaScript snippet is embedded into any webpage to collect the typing data in real time.
