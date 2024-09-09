@@ -11,8 +11,8 @@ By tracking the way a user interacts with the keyboard, we can build a unique pr
 ### Getting Started
 1. **Clone the repository**:
     ```bash
-    git clone https://gitlab.com/username/keystrokeml-snippet.git
-    ```
+    git clone https://gitlab.com/tier61wro/KeystrokeML_WebSnippet.git 
+    ``` 
 
 2. **Install dependencies**:
     ```bash
