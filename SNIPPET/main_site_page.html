@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Web Snippet</title>
+    <script>
+        // Функция для отправки данных на сервер
+        function sendData(data, endpoint) {
+            fetch(`http://127.0.0.1:5000/${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Используем alert для вывода сообщения о пользователе
+                if (data.prediction === 'Original user') {
+                    alert('User is: Original');
+                } else {
+                    alert('User is: Different');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Функция для сбора данных пользователя
+        function collectUserData() {
+            const userData = {
+                userAgent: navigator.userAgent, // Информация о браузере
+                platform: navigator.platform,   // Операционная система
+                language: navigator.language,   // Язык
+                screenSize: {
+                    width: window.screen.width,
+                    height: window.screen.height
+                },
+                currentURL: window.location.href, // Текущий URL
+                referrer: document.referrer, // Источник перехода
+                timestamp: new Date().toISOString() // Время визита
+            };
+
+            console.log('Collected Data:', userData);
+
+            // Отправляем данные на сервер
+            sendData(userData, 'collect');
+        }
+
+        // Переменная для хранения данных о нажатиях клавиш
+        let keyPressData = [];
+
+        // Слушаем события клавиатуры для сбора динамики ввода текста
+        function setupKeystrokeListeners() {
+            const form = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+
+            // Устанавливаем имя пользователя как "admin"
+            usernameInput.value = 'admin';
+
+            form.addEventListener('keydown', (event) => {
+                let keyEvent = {
+                    key: event.key,
+                    eventType: 'keydown',
+                    timestamp: Date.now()
+                };
+                keyPressData.push(keyEvent);
+            });
+
+            form.addEventListener('keyup', (event) => {
+                let keyEvent = {
+                    key: event.key,
+                    eventType: 'keyup',
+                    timestamp: Date.now()
+                };
+                keyPressData.push(keyEvent);
+            });
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                console.log('Keystroke Data:', keyPressData);
+
+                // Отправляем данные о нажатиях клавиш на сервер
+                sendData(keyPressData, 'keystroke');
+
+                // Очищаем массив с данными
+                keyPressData = [];
+
+                // Очищаем поле пароля после отправки формы
+                passwordInput.value = '';
+            });
+        }
+
+        // Сбор данных при загрузке страницы
+        window.onload = function() {
+            collectUserData(); // Запуск сбора инфы о пользователе
+            setupKeystrokeListeners(); // Запускаем сбор данных о вводе текста
+        };
+    </script>
+</head>
+<body>
+    <h1>Test Web Snippet</h1>
+
+    <!-- Форма авторизации -->
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
